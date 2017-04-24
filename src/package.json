@@ -1,0 +1,34 @@
+{
+  "name": "sonet-appskit",
+  "version": "0.1.0",
+  "description": "Set of common libraries helping to create SoNET enabled apps",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iradek/SoNET.AppsKit"
+  },
+  "author": {
+    "name": "i-Radek Software",
+    "email": "iradek@iradek.com"
+  },
+  "keywords": [
+    "sonet",
+    "iradek",
+    "web",
+    "design",
+    "automation",
+    "web",
+    "engine"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iradek/SoNET.AppsKit/issues"
+  },
+  "homepage": "https://github.com/iradek/SoNET.AppsKit#readme",
+  "module": "sonet-appskit.js",
+  "typings": "sonet-appskit.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  }
+}
