@@ -19,15 +19,17 @@ export * from "./common/validationMessage.component";
     CommonModule
   ],
   declarations: [    
+    ValidationMessage
   ],
   exports: [    
+    ValidationMessage
   ]
 })
 export class SoNETAppsKitModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SoNETAppsKitModule,
-      providers: [HttpProxy, OAuthService, UrlService, OAuthConfig, ValidationService, ValidationMessage]
+      providers: [HttpProxy, OAuthService, UrlService, OAuthConfig, ValidationService]
     };
   }
 }
