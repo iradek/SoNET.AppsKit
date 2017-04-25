@@ -4,7 +4,7 @@ import { ValidationService } from "./validationService";
 
 
 @Component({
-    selector: 'validation-message',
+    selector: 'sonet-validation-message',
     template: `<div class="alert alert-danger" *ngIf="errorMessage !== null">{{errorMessage}}</div>`
 })
 export class ValidationMessage {

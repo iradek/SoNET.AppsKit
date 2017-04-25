@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Rx";
 import { RequestOptions, Request, RequestOptionsArgs, Response, Headers, Http } from "@angular/http";
 import { AppsConfig } from './apps.config'
-import { OAuthConfig } from './oAuth.config';
 import * as enums from './enums';
 import { UrlService } from "./urlService";
 
@@ -13,7 +12,7 @@ export class OAuthService {
     tokenUrl: string;
     tokenKey: string = "access_token";
 
-    constructor(private http: Http, private urlService: UrlService, private oAuthConfig: OAuthConfig, private appsConfig: AppsConfig) {
+    constructor(private http: Http, private urlService: UrlService, private appsConfig: AppsConfig) {
         this.tokenUrl = this.urlService.resolveFinalUrl("/mvc/oauth/token");
     }
 
@@ -29,17 +28,17 @@ export class OAuthService {
     }
 
     retrieveAccessToken(): Observable<string> {
-        if (this.oAuthConfig.oAuthGrant == enums.OAuthGrant.ResourceOwner) {
+        if (this.appsConfig.oAuthGrant == enums.OAuthGrant.ResourceOwner) {
             var formUrlEncodedContent = new URLSearchParams();
-            formUrlEncodedContent.append("scope", "Api.Access" + (this.oAuthConfig.siteName ? " SiteName:" + this.oAuthConfig.siteName : "") /*required to call any SoNET API method*/ + (this.oAuthConfig.passwordAlreadyEncrypted ? " Password.Encrypted" : ""));
+            formUrlEncodedContent.append("scope", "Api.Access" + (this.appsConfig.siteName ? " SiteName:" + this.appsConfig.siteName : "") /*required to call any SoNET API method*/ + (this.appsConfig.passwordAlreadyEncrypted ? " Password.Encrypted" : ""));
             formUrlEncodedContent.append("grant_type", "password");
-            formUrlEncodedContent.append("username", this.oAuthConfig.userName);
-            formUrlEncodedContent.append("password", this.oAuthConfig.userPassword);
+            formUrlEncodedContent.append("username", this.appsConfig.userName);
+            formUrlEncodedContent.append("password", this.appsConfig.userPassword);
             return this.requestAccessToken(formUrlEncodedContent);
         }
-        if (this.oAuthConfig.oAuthGrant == enums.OAuthGrant.ClientCredentials) {
+        if (this.appsConfig.oAuthGrant == enums.OAuthGrant.ClientCredentials) {
             var formUrlEncodedContent = new URLSearchParams();
-            formUrlEncodedContent.append("scope", "Api.Access" + (this.oAuthConfig.siteName ? " SiteName:" + this.oAuthConfig.siteName : "")); //required to call any SoNET API method )
+            formUrlEncodedContent.append("scope", "Api.Access" + (this.appsConfig.siteName ? " SiteName:" + this.appsConfig.siteName : "")); //required to call any SoNET API method )
             formUrlEncodedContent.append("grant_type", "client_credentials")
             return this.requestAccessToken(formUrlEncodedContent);
         }

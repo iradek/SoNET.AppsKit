@@ -1,6 +1,6 @@
 {
   "name": "sonet-appskit",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "description": "Set of common services and components helping to create SoNET enabled apps",
   "scripts": {
     "build": "gulp build",
