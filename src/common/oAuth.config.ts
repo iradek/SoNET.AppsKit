@@ -1,8 +1,10 @@
 import { OAuthGrant } from './enums';
+import { Injectable } from "@angular/core";
 
 /**
  * Configures OAuth requests.
  */
+@Injectable()
 export class OAuthConfig {
     /** Supported OAuth grant type. */
     oAuthGrant: OAuthGrant;

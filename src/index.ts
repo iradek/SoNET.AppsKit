@@ -5,9 +5,11 @@ import { HttpProxy } from "./common/httpProxy";
 import { OAuthService } from "./common/oAuthService";
 import { UrlService } from "./common/urlService";
 import { OAuthConfig } from "./common/oAuth.config";
+import { AppsConfig } from "./common/apps.config";
 import { ValidationService } from "./common/validationService";
 import { ValidationMessage } from "./common/validationMessage.component";
 
+export * from "./common/apps.config";
 export * from "./common/apiClient";
 export * from "./common/httpProxy";
 export * from "./common/oAuthService";
@@ -20,10 +22,10 @@ export * from "./common/validationMessage.component";
   imports: [
     CommonModule
   ],
-  declarations: [    
+  declarations: [
     ValidationMessage
   ],
-  exports: [    
+  exports: [
     ValidationMessage
   ]
 })
@@ -31,7 +33,7 @@ export class SoNETAppsKitModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SoNETAppsKitModule,
-      providers: [ApiClient, HttpProxy, OAuthService, UrlService, OAuthConfig, ValidationService]
+      providers: [ApiClient, HttpProxy, OAuthService, UrlService, OAuthConfig, ValidationService, AppsConfig]
     };
   }
 }

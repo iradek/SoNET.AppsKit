@@ -1,6 +1,6 @@
 {
   "name": "sonet-appskit",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Set of common libraries helping to create SoNET enabled apps",
   "repository": {
     "type": "git",
@@ -28,6 +28,8 @@
   "typings": "sonet-appskit.d.ts",
   "peerDependencies": {
     "@angular/core": "^4.0.0",
+    "@angular/common": "^4.0.0",
+    "@angular/http": "^4.0.0",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   }
