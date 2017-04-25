@@ -1,5 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ApiClient } from "./common/apiClient";
 import { HttpProxy } from "./common/httpProxy";
 import { OAuthService } from "./common/oAuthService";
 import { UrlService } from "./common/urlService";
@@ -7,6 +8,7 @@ import { OAuthConfig } from "./common/oAuth.config";
 import { ValidationService } from "./common/validationService";
 import { ValidationMessage } from "./common/validationMessage.component";
 
+export * from "./common/apiClient";
 export * from "./common/httpProxy";
 export * from "./common/oAuthService";
 export * from "./common/urlService";
@@ -29,7 +31,7 @@ export class SoNETAppsKitModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SoNETAppsKitModule,
-      providers: [HttpProxy, OAuthService, UrlService, OAuthConfig, ValidationService]
+      providers: [ApiClient, HttpProxy, OAuthService, UrlService, OAuthConfig, ValidationService]
     };
   }
 }
