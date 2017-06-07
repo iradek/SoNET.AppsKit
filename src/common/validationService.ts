@@ -26,8 +26,8 @@ export class ValidationService {
         let error = { 'invalidNumber': true };
         if (!control || !control.value)
             return error;
-        if (control.value.match(/^[0-9]+$/))
-            return null;
-        return error;
+        if (!isNaN(control.value))
+            return null; //number already
+        return control.value.match(/^[0-9]+$/) ? null : error;
     }
 }

@@ -18,13 +18,28 @@ export class HttpProxy extends Http {
         this.urlService = urlService;
     }
 
-    async getAsync<T>(url: string, options?: RequestOptionsArgs): Promise<T>  {
+    async getAsync<T>(url: string, options?: RequestOptionsArgs): Promise<T> {
         const response = await this.get(url, options).toPromise();
         return response ? response.json() : Promise.reject("No response");
     }
 
-    async postAsync<T>(url: string, body: any, options?: RequestOptionsArgs) : Promise<T> {
+    async postAsync<T>(url: string, body: any, options?: RequestOptionsArgs): Promise<T> {
         const response = await this.post(url, body, options).toPromise();
+        return response.json();
+    }
+
+    async patchAsync<T>(url: string, body: any, options?: RequestOptionsArgs): Promise<T> {
+        const response = await this.patch(url, body, options).toPromise();
+        return response.json();
+    }
+
+    async putAsync<T>(url: string, body: any, options?: RequestOptionsArgs): Promise<T> {
+        const response = await this.put(url, body, options).toPromise();
+        return response.json();
+    }
+
+    async deleteAsync<T>(url: string, options?: RequestOptionsArgs): Promise<T> {
+        const response = await this.delete(url, options).toPromise();
         return response.json();
     }
 
@@ -34,6 +49,18 @@ export class HttpProxy extends Http {
 
     post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
         return super.post(this.urlService.resolveFinalUrl(url), body, options);
+    }
+
+    patch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+        return super.patch(this.urlService.resolveFinalUrl(url), body, options);
+    }
+
+    put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+        return super.put(this.urlService.resolveFinalUrl(url), body, options);
+    }
+
+    delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
+        return super.delete(this.urlService.resolveFinalUrl(url), options);
     }
 
     // post(url: string, body: any) {
@@ -55,9 +82,8 @@ export class HttpProxy extends Http {
         //adding access token to each http request before calling super(..,..)
         let token = this.oAuthService.token;
         if (typeof url === 'string') {
-            if (!options) {
+            if (!options)
                 options = { headers: new Headers() };
-            }
             options.headers.set("Authorization", `Bearer ${token}`);
         }
         else {
@@ -77,7 +103,7 @@ export class HttpProxy extends Http {
             else
                 Observable.throw(error);
         })
-    }       
+    }
 
     showSpinner() {
 

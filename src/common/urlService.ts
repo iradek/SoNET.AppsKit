@@ -10,6 +10,7 @@ export class UrlService {
     resolveFinalUrl(url: string): string {
         if (!url)
             throw new Error("Invalid url to resolve.");
+        url = url.replace("~/", "/");
         return this.appsConfig.api_baseUrl + (url.startsWith("/") ? url : "/" + url)
     }
 
