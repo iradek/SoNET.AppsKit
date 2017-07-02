@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ValidationService } from "./validationService";
+import { ValidationService } from "../common/validation.service";
 
 
 @Component({
     selector: 'sonet-validation-message',
     template: `<div class="alert alert-danger" *ngIf="errorMessage !== null">{{errorMessage}}</div>`
 })
-export class ValidationMessage {
+export class ValidationMessageComponent {
 
     @Input() control: FormControl;
     constructor() { }

@@ -3,7 +3,7 @@ import { Observable } from "rxjs/Rx";
 import { RequestOptions, Request, RequestOptionsArgs, Response, Headers, Http } from "@angular/http";
 import { AppsConfig } from './apps.config'
 import * as enums from './enums';
-import { UrlService } from "./urlService";
+import { UrlService } from "./url.service";
 
 @Injectable()
 export class OAuthService {
@@ -51,6 +51,8 @@ export class OAuthService {
      * @param formContent (key, value) pairs with application/x-www-form-urlencoded data to send along.
      */
     requestAccessToken(formContent: URLSearchParams): Observable<string> {
+         if (this.appsConfig!.logging)
+            console.log("Retrieving access token.", formContent);
         let clientID = this.appsConfig.oauth_client_id;
         let clientSecret = this.appsConfig.oauth_client_secret;
         var newHeaders = new Headers();

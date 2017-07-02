@@ -30,4 +30,7 @@ export class AppsConfig {
 
     /** Whether the user password is already encrypted (ResourceOwner grant). */
     passwordAlreadyEncrypted: boolean
+
+    /** Whether to enable extra logging to a console that might help diagnose api calls made by this library */
+    logging: boolean
 }
