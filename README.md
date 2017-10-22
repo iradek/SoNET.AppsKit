@@ -4,6 +4,13 @@
 
 This is a set of common services and components helping to create SoNET enabled apps. 
 
+## Compilation
+
+```bash
+$ npm install
+$ npm run build
+```
+
 ## Installation
 
 ```bash
