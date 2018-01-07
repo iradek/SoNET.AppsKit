@@ -1,11 +1,11 @@
 ﻿import { Injectable } from "@angular/core";
-import { OAuthGrant } from "./enums";
-import { AppsConfig } from "./apps.config";
-import { SoNetProxy } from "./soNetProxy.service";
+import { OAuthGrant } from "./sonet.enums";
+import { SoNetAppsConfig } from "./sonet.apps.config";
+import { SoNetProxy } from "./sonet.proxy.service";
 
 @Injectable()
-export class ApiClient {
-    constructor(protected sonetProxy: SoNetProxy, protected appsConfig: AppsConfig) {
+export class SoNetApiClient {
+    constructor(protected sonetProxy: SoNetProxy, protected appsConfig: SoNetAppsConfig) {
 
     }
 

@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Rx";
 import { RequestOptions, Request, RequestOptionsArgs, Response, Headers, Http } from "@angular/http";
-import { AppsConfig } from './apps.config'
-import * as enums from './enums';
-import { UrlService } from "./url.service";
+import { SoNetAppsConfig } from './sonet.apps.config'
+import { SoNetUrlService } from "./sonet.url.service";
+import { OAuthGrant } from './sonet.enums';
 
 @Injectable()
-export class OAuthService {
+export class SoNetOAuthService {
 
     token: string;
     tokenUrl: string;
     tokenKey: string = "access_token";
 
-    constructor(private http: Http, private urlService: UrlService, private appsConfig: AppsConfig) {
+    constructor(private http: Http, private urlService: SoNetUrlService, private appsConfig: SoNetAppsConfig) {
         this.tokenUrl = this.urlService.resolveFinalUrl("/mvc/oauth/token");
     }
 
@@ -28,7 +28,7 @@ export class OAuthService {
     }
 
     retrieveAccessToken(): Observable<string> {
-        if (this.appsConfig.oAuthGrant == enums.OAuthGrant.ResourceOwner) {
+        if (this.appsConfig.oAuthGrant == OAuthGrant.ResourceOwner) {
             var formUrlEncodedContent = new URLSearchParams();
             formUrlEncodedContent.append("scope", "Api.Access" + (this.appsConfig.siteName ? " SiteName:" + this.appsConfig.siteName : "") /*required to call any SoNET API method*/ + (this.appsConfig.passwordAlreadyEncrypted ? " Password.Encrypted" : ""));
             formUrlEncodedContent.append("grant_type", "password");
@@ -36,7 +36,7 @@ export class OAuthService {
             formUrlEncodedContent.append("password", this.appsConfig.userPassword);
             return this.requestAccessToken(formUrlEncodedContent);
         }
-        if (this.appsConfig.oAuthGrant == enums.OAuthGrant.ClientCredentials) {
+        if (this.appsConfig.oAuthGrant == OAuthGrant.ClientCredentials) {
             var formUrlEncodedContent = new URLSearchParams();
             formUrlEncodedContent.append("scope", "Api.Access" + (this.appsConfig.siteName ? " SiteName:" + this.appsConfig.siteName : "")); //required to call any SoNET API method )
             formUrlEncodedContent.append("grant_type", "client_credentials")
@@ -51,7 +51,7 @@ export class OAuthService {
      * @param formContent (key, value) pairs with application/x-www-form-urlencoded data to send along.
      */
     requestAccessToken(formContent: URLSearchParams): Observable<string> {
-         if (this.appsConfig!.logging)
+         if (this.appsConfig && this.appsConfig.logging)
             console.log("Retrieving access token.", formContent);
         let clientID = this.appsConfig.oauth_client_id;
         let clientSecret = this.appsConfig.oauth_client_secret;

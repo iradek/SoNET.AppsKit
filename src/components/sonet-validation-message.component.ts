@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ValidationService } from "../common/validation.service";
+import { SoNetValidationService } from "../common/sonet.validation.service";
 
 
 @Component({
@@ -15,7 +15,7 @@ export class ValidationMessageComponent {
     get errorMessage() {
         for (let propertyName in this.control.errors) {
             if (this.control.errors.hasOwnProperty(propertyName) && this.control.touched) {
-                return ValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]);
+                return SoNetValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]);
             }
         }
         return null;

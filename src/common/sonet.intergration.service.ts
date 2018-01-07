@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 @Injectable()
-export class IntegrationService {
+export class SoNetIntegrationService {
     /**
      * Gets a value used to pass from outside interop environment.
      * @param key Key under which the value is held.

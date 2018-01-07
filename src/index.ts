@@ -1,25 +1,27 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiClient } from "./common/apiClient.service";
-import { SoNetProxy } from "./common/soNetProxy.service";
-import { OAuthService } from "./common/oAuth.service";
-import { UrlService } from "./common/url.service";
-import { AppsConfig } from "./common/apps.config";
-import { ValidationService } from "./common/validation.service";
-import { IntegrationService } from "./common/intergration.service";
-import { ValidationMessageComponent } from "./components/validation-message.component";
-import { BusyIndicatorComponent } from "./components/busy-indicator.component";
+import { SoNetApiClient } from "./common/sonet.apiClient.service";
+import { SoNetProxy } from "./common/sonet.proxy.service";
+import { SoNetOAuthService } from "./common/sonet.oAuth.service";
+import { SoNetUrlService } from "./common/sonet.url.service";
+import { SoNetAppsConfig } from "./common/sonet.apps.config";
+import { SoNetConfigService } from './common/sonet.config.service';
+import { SoNetValidationService } from "./common/sonet.validation.service";
+import { SoNetIntegrationService } from "./common/sonet.intergration.service";
+import { ValidationMessageComponent } from "./components/sonet-validation-message.component";
+import { BusyIndicatorComponent } from "./components/sonet-busy-indicator.component";
 
-export * from "./common/apps.config";
-export * from "./common/apiClient.service";
-export * from "./common/soNetProxy.service";
-export * from "./common/oAuth.service";
-export * from "./common/url.service";
-export * from "./common/validation.service";
-export * from "./components/validation-message.component";
-export * from "./components/busy-indicator.component";
-export * from "./common/intergration.service";
-export * from "./common/enums";
+export * from "./common/sonet.apps.config";
+export * from "./common/sonet.apiClient.service";
+export * from "./common/sonet.proxy.service";
+export * from "./common/sonet.oAuth.service";
+export * from "./common/sonet.url.service";
+export * from "./common/sonet.validation.service";
+export * from "./components/sonet-validation-message.component";
+export * from "./components/sonet-busy-indicator.component";
+export * from "./common/sonet.intergration.service";
+export * from "./common/sonet.enums";
+export * from "./common/sonet.config.service";
 
 @NgModule({
   imports: [
@@ -36,7 +38,7 @@ export class SoNETAppsKitModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SoNETAppsKitModule,
-      providers: [ApiClient, SoNetProxy, OAuthService, UrlService, ValidationService, IntegrationService]
+      providers: [SoNetApiClient, SoNetProxy, SoNetOAuthService, SoNetUrlService, SoNetValidationService, SoNetIntegrationService, SoNetConfigService]
     };
   }
 }

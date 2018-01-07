@@ -1,6 +1,6 @@
 import { AbstractControl } from "@angular/forms";
 
-export class ValidationService {
+export class SoNetValidationService {
     static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
         let config = {
             'required': 'Required',

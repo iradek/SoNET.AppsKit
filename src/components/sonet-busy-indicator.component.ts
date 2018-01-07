@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from "@angular/core";
 import { IRequestInterceptor } from "../common/request-interceptor.interface";
 import { IResponseInterceptor } from "../common/response-interceptor.interface";
-import { SoNetProxy } from "../common/soNetProxy.service";
+import { SoNetProxy } from "../common/sonet.proxy.service";
 
 const DEFAULT_INDICATOR_DELAY = 500;
 
@@ -13,7 +13,7 @@ const DEFAULT_INDICATOR_DELAY = 500;
             <div class="loader"></div>
         </div>
     `,
-    styleUrls: ['./busy-indicator.component.css']
+    styleUrls: ['./sonet-busy-indicator.component.css']
 })
 
 export class BusyIndicatorComponent implements OnDestroy, IRequestInterceptor, IResponseInterceptor {

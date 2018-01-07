@@ -4,9 +4,9 @@ import { URLSearchParams } from "@angular/http";
 import { Observable } from "rxjs/Rx";
 import { IRequestInterceptor } from "./request-interceptor.interface";
 import { IResponseInterceptor } from "./response-interceptor.interface";
-import { UrlService } from "./url.service";
-import { OAuthService } from "./oAuth.service";
-import { AppsConfig } from "./apps.config";
+import { SoNetUrlService } from "./sonet.url.service";
+import { SoNetOAuthService } from "./sonet.oAuth.service";
+import { SoNetAppsConfig } from "./sonet.apps.config";
 
 export interface Func<T, T1, T2, TResult> {
     (item: T, item1: T1, item2: T2): TResult;
@@ -15,13 +15,13 @@ export interface Func<T, T1, T2, TResult> {
 @Injectable()
 export class SoNetProxy extends Http {
 
-    private oAuthService: OAuthService;
-    private urlService: UrlService;
-    private appsConfig: AppsConfig;
+    private oAuthService: SoNetOAuthService;
+    private urlService: SoNetUrlService;
+    private appsConfig: SoNetAppsConfig;
     private requestInterceptors: IRequestInterceptor[] = [];
     private responseInterceptors: IResponseInterceptor[] = [];
 
-    constructor(backend: XHRBackend, options: RequestOptions, oauthService: OAuthService, urlService: UrlService, appsConfig: AppsConfig) {
+    constructor(backend: XHRBackend, options: RequestOptions, oauthService: SoNetOAuthService, urlService: SoNetUrlService, appsConfig: SoNetAppsConfig) {
         super(backend, options);
         this.oAuthService = oauthService;
         this.urlService = urlService;
@@ -104,8 +104,9 @@ export class SoNetProxy extends Http {
             if (error.status === 401) {
                 return this.oAuthService.updateToken().mergeMap((result: boolean) => {
                     //if got new access token - retry request
-                    if (result)
+                    if (result) {
                         return this.request(url, options);
+                    }
                     //otherwise - throw error
                     return Observable.throw(new Error('Can\'t refresh the token'));
                 })
@@ -141,7 +142,7 @@ export class SoNetProxy extends Http {
 
     private async _requestCoreAsync(url: string, method: string, data: any, options: RequestOptions, action: Func<string, any, RequestOptions, Observable<Response>>): Promise<any> {
         options.headers = options.headers || new Headers();
-        if (this.appsConfig!.logging)
+        if (this.appsConfig && this.appsConfig.logging)
             console.log(`Request. Url:'${url}'. Method:'${method}'`, data, options);
 
         let shouldIntercept = await this._invokeRequestInterceptorsAsync(url, method, data, options.headers);
@@ -151,7 +152,7 @@ export class SoNetProxy extends Http {
         let response;
         try {
             response = await action(url, data, options).toPromise();
-            if (this.appsConfig!.logging)
+            if (this.appsConfig && this.appsConfig.logging)
                 console.log(`Response. Url:'${url}'. Method:'${method}'`, response);
         }
         catch (errorResponse) {

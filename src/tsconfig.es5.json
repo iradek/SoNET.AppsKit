@@ -20,7 +20,8 @@
     "types": []
   },
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": true,
+    //https://github.com/angular/angular/issues/17516
+    "annotateForClosureCompiler": false, 
     "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
     "flatModuleOutFile": "sonet-appskit.js",

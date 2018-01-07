@@ -1,6 +1,6 @@
 {
   "name": "sonet-appskit",
-  "version": "0.5.3",
+  "version": "0.6.9",
   "description": "Set of common libraries helping to create SoNET enabled apps",
   "repository": {
     "type": "git",
