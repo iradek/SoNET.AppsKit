@@ -7,16 +7,18 @@ import { SoNetAppsConfig } from "./sonet.apps.config";
  * Loads a configuration from the file.
  */
 export class SoNetConfigService {
-    private _config: SoNetAppsConfig;        
+    private _config: SoNetAppsConfig;
 
-    constructor(private http: Http) { }    
+    constructor(private http: Http) { }
 
-    async loadAsync(url: string) : Promise<SoNetAppsConfig> {        
+    async loadAsync(url: string): Promise<SoNetAppsConfig> {
         return new Promise<SoNetAppsConfig>((resolve) => {
-            this.http.get(url).map(res => res.json()).subscribe(config => {
-                this._config = config;
-                resolve();
-            })
+            this.http.get(url).map(res => res.json()).subscribe(
+                config => {
+                    this._config = config;
+                    resolve();
+                },
+                error => resolve(null))
         });
     }
 
