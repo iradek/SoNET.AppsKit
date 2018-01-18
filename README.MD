@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a set of common services and components helping to create SoNET enabled apps. 
+This is a set of common services and components that help to create SoNET Web Engine enabled apps. This allows you to get started with this kit and hopefully create something wonderful and useful to many people. Not only can you generate feature packed websites instantly, you can make your own solutions that use the various functions available via the engine API as you see fit.
 
 ## Compilation
 
